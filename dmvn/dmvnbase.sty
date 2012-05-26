@@ -9,7 +9,7 @@
 \newcommand{\dmvnmail}{\texttt{dmvn@mccme.ru}}
 
 %===========================
-% here is cp1251 encoding
+% here is utf8 encoding
 %===========================
 
 % right hyphen rules
@@ -155,7 +155,7 @@
 % E.O.F. Advanced Pictures Engine ----------------------------------------------------------------------------------
 
 % number with circle as superscript
-\newcommand{\pt}[1]{$\mathbf{#1}^\circ$}
+\newcommand{\pt}[1]{\ensuremath{\mathbf{#1}^\circ}}
 
 % environment with variable \itemsep parameter
 
@@ -179,12 +179,17 @@
 % ===============================================================
 % Font: Bold Small Letters
 % ===============================================================
-\newcommand{\db}{\mathbf{d}}                                          % d bold
-\newcommand{\ib}{\mathbf{i}}                                          % i bold
-\newcommand{\jb}{\mathbf{j}}                                          % j bold
-\newcommand{\kb}{\mathbf{k}}                                          % k bold
-\newcommand{\nb}{\mathbf{n}}                                          % n bold
-\newcommand{\rb}{\mathbf{r}}                                          % r bold
+\newcommand{\ab}{\ensuremath{\mathbf a}} % a bold
+\newcommand{\bb}{\ensuremath{\mathbf b}} % b bold
+\newcommand{\cb}{\ensuremath{\mathbf c}} % c bold
+\newcommand{\eb}{\ensuremath{\mathbf e}} % e bold
+\newcommand{\xb}{\ensuremath{\mathbf x}} % x bold
+\newcommand{\db}{\ensuremath{\mathbf{d}}}                                          % d bold
+\newcommand{\ib}{\ensuremath{\mathbf{i}}}                                          % i bold
+\newcommand{\jb}{\ensuremath{\mathbf{j}}}                                          % j bold
+\newcommand{\kb}{\ensuremath{\mathbf{k}}}                                          % k bold
+\newcommand{\nb}{\ensuremath{\mathbf{n}}}                                          % n bold
+\newcommand{\rb}{\ensuremath{\mathbf{r}}}                                          % r bold
 
 % ===============================================================
 % Font: Bold Letters
@@ -408,7 +413,6 @@
 \newcommand{\ta}{\theta}
 \newcommand{\Ta}{\Theta}
 \newcommand{\ze}{\zeta}
-
 \newcommand{\nab}{\nabla}
 
 % ===============================================================

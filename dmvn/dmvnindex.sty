@@ -1,0 +1,31 @@
+\ProvidesPackage{dmvnindex}
+
+% Some index magic, imported from math history lection.
+\newcommand{\auth}[1]{\index{#1}\textsc{#1}}
+\newcommand{\sauth}[2]{\index{#2}\textsc{#1}}
+\newcommand{\rauth}[3]{\index{#3, #1. #2.}\textsc{#1.\,#2.\,#3}}
+\newcommand{\eauth}[2]{\index{#2, #1.}\textsc{#1.\,#2}}
+
+% To be continued note
+\newcommand{\tbk}{\par\bigskip
+  {\huge$$\mathfrak{To\;be\;continued\ldots}$$\par}}
+
+% Mark lection number.
+\newcommand{\marklec}[2]{\par
+  \bigskip
+  %\hrule width \mytextwidth
+  \vskip1pt
+  %\hrule width \mytextwidth
+  \vskip1pt
+  \centerline{\strut\texttt{Лекция #1} --- \texttt{#2}}
+  \vskip1pt
+  %\hrule width \mytextwidth
+  \vskip1pt
+%  \hrule width \mytextwidth\par
+}
+\newcommand{\authorcomment}[1]
+{{
+  $[$
+      {#1}
+      $]$
+}}
