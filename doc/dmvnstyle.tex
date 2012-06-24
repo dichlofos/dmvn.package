@@ -1,0 +1,853 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{dmvn}
+\newcommand{\dmvnversion}{1.36}
+\newcommand{\tw}[1]{\texttt{#1}} % TypeWriter
+
+\newcommand{\pkgdmvn}{\texttt{dmvn}}
+\newcommand{\pkgbase}{\texttt{dmvnbase}}
+\newcommand{\pkgrusscorr}{\texttt{russcorr}}
+
+\newcommand{\skipcol}{\qquad\qquad\qquad}
+\newcommand{\rulez}{\rule[-12pt]{0pt}{29pt}}
+\newcommand{\rulezz}{\rule[-13pt]{0pt}{31pt}}
+
+\tocsubsectionparam{2.6em}
+\tocsubsubsectionparam{3.5em}
+
+\title{Документация к стилевым пакетам \texttt{dmvn.sty} и \texttt{dmvnbase.sty}}
+\author{\copyright{} 2004--2006, DMVN Corporation}
+\date{Версия пакетов \dmvnversion, последнее обновление: \today~г.}
+
+\begin{document}
+\maketitle
+
+\dmvntrail
+
+\tableofcontents
+\pagebreak
+
+\section{Общие сведения}
+
+\subsection{Зависимости от других пакетов}
+Пакеты \pkgdmvn{} и~\pkgbase{} используют несколько стандартных пакетов: \texttt{inputenc}, \texttt{amssymb},
+\texttt{amsmath}, \texttt{mathrsfs}, \texttt{epsf}. Все они входят в~полный комплект \LaTeX{} (например, в пакет
+MiK\TeX или \TeX{}Live, который можно скачать из~архивов CTAN). Кроме этого, необходим пакет \pkgrusscorr{} А.\,Шеня и~С.\,Львовского,
+а~также те пакеты, от которых он зависит. Из соображений полной переносимости в~распространяемую версию включены
+все необходимые русификационные пакеты. Если хочется подключать пакет к~многим документам, а~хранить
+его в~одном экземпляре (как include файлы в~C++),
+нужно, естественно, указать к~нему путь в~настройках \TeX'а (например, \texttt{miktex.ini} в~одноименной
+реализации компилятора). Если же все файлы собрать вместе, то работать будет безо всяких
+дополнительных настроек \TeX'а. В~частности, данное описание должно компилироваться при наличии в~том же
+каталоге файлов \texttt{dmvn.sty}, \texttt{dmvnbase.sty}, \texttt{russcorr.sty}, \texttt{russlh.sty},
+\texttt{mathlh.sty} и~\texttt{russadd.sty}. Кроме того, к~данному дистрибутиву прилагается файл
+\texttt{diagram.tex}, представляющий собой слегка подправленную версию оригинального пакета из стандартного
+набора. Проблема была в~том, что объявленная там команда \verb'\square', часто используемая для набора
+коммутативных диаграмм, конфликтует с~одноимённой командой из одного \AmS\TeX  овского пакета. Имя этой
+команды в~прилагаемом файле исправлено на \verb'\dsquare'.
+
+\subsection{Compatibility issues}
+
+Начиная с~версии~1.19 из~пакета исключены команды \verb'\eval' и~\verb'\evalm', определяющие
+подстановки разных высот. Вместо них рекомендуется использовать команду \verb'\evn',
+как основную, и~команды \verb'\ev' и~\verb'\evu' в~исключительных случаях.
+
+Начиная с версии 1.30 ведётся changelog в файле \texttt{versiontracking.txt}.
+
+\subsection{Назначение}
+Пакеты \pkgdmvn{} и~\pkgbase{} призваны упростить набор математических текстов и, помимо
+переопределения стандартных окружений, содержат множество новых команд сокращений.
+
+\begin{ex}
+Стандартная команда \verb'\alpha' сокращена до \verb'\al'.
+\end{ex}
+
+\subsection{Подключение и опции}
+Для использования всех возможностей пакетов достаточно подключить только пакет \pkgdmvn{},
+все остальные будут подключены автоматически. В~стандартной ситуации основной документ
+в~преамбуле может содержать только следующие строки
+\begin{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{dmvn}
+\end{verbatim}
+
+Пакет \pkgdmvn{} имеет три опции: \verb'simple/nosimple', \verb'dots/nodots'
+и~\verb'thmnormal/thmitshape'. Все они работают как переключатели и~означают следующее:
+\ctab{|c|c|}{
+\hline \texttt{simple/nosimple} & Упрощённый стиль/Обычный стиль\\
+\hline \texttt{dots/nodots} & Есть точки точки после номеров секций тп/Точек нет\\
+\hline \texttt{thmnormal/thmitshape} & <<Теоремы>> набираются прямым шрифтом/<<Теоремы>> выделяются курсивом\\
+\hline \texttt{diagram/nodiagram} & Подключать ли пакет \texttt{diagram.tex} \\
+\hline}
+
+Упрощённый стиль соответствует меньшим размерам заголовков и~более стандартному начертанию их шрифтов.
+Он может быть полезен, если документ небольшой. Кроме того, нумерация теорем тп в~этом случае
+будет простой, е ставится только номер теоремы.
+
+Необходимость в отключении пакета \texttt{diagram.tex} может быть вызвана тем, что
+он конфликтует с командами для рисования типа \verb'\circle', \verb'\line', \verb'\put' тд
+
+Данный документ набран с~использованием
+комбинации \texttt{nosimple}, \texttt{dots}, \texttt{thmitshape}.
+
+По умолчанию установлены следующие опции: \texttt{nosimple}, \texttt{dots}, \texttt{thmitshape}
+и \texttt{diagram}.
+
+
+Опции устанавливаются обычным образом при подключении пакета, например:
+\begin{verbatim}
+\usepackage[simple,dots]{dmvn}
+\end{verbatim}
+
+\pagebreak
+
+\section{Описание макроопределений пакета}
+
+\subsection{Стиль документов DMVN Corporation}
+
+Местоположение нашего основного web сайта можно узнать с~помощью команды \verb'\dmvnwebsite':
+\cent{\dmvnwebsite{},}
+положение зеркала с~помощью команды \verb'\dmvnwebsitemirror':
+\cent{\dmvnwebsitemirror{},}
+а~e-mail с~помощью команды
+\verb'\dmvnmail':
+\cent{\dmvnmail{}.}
+
+В~пакете также определена команда для формирования титульной страницы. Она называется
+\verb'\dmvntitle'. Мы не будем подробно описывать её параметры (гораздо проще заглянуть в~определение),
+однако заметим, что именно она используется для оформления титульных страниц лекций нашего
+изготовления. Эмблема МехМата \verb'mmlogo.2', используемая в~этом определении,
+является нашим MetaPost овским творением и~распространяется свободно, правда,
+без исходных текстов.
+
+Команда \verb'\dmvntrail' ставит <<штамп>>  DMVN Corporation такого вида:
+
+\medskip\dmvntrail
+
+\subsection{Операторы}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline \textbf{Команда} & \textbf{Оператор} & \textbf{Описание} \\
+\hline \verb'\Ad'  & $\Ad$  &   Присоединённый оператор  \\
+\hline \verb'\Ann' & $\Ann$ &   Аннулятор  \\
+\hline \verb'\Arg' & $\Arg$ &   Аргумент  \\
+\hline \verb'\area' & $\area$ & Площадь    \\
+\hline \verb'\arsh' & $\arsh$ & Ареа синус  \\
+\hline \verb'\Aut' & $\Aut$ &  Автоморфизмы \\
+\hline \verb'\Card' & $\Card$ & Мощность множества  \\
+\hline \verb'\Char' & $\Char$ & Характеристика поля  \\
+\hline \verb'\Cl' & $\Cl$ &   Замыкание  \\
+\hline \verb'\codim' & $\codim$ & Коразмерность    \\
+\hline \verb'\Coim' & $\Coim$ & Прообраз    \\
+\hline \verb'\Com' & $\Com$ & Вычислимые функции    \\
+\hline \verb'\const' & $\const$ & Константа    \\
+\hline \verb'\conv' & $\conv$ & Выпуклая оболочка    \\
+\hline \verb'\Corr' & $\Corr$ &  Корреляция   \\
+\hline \verb'\cov' & $\cov$ &   Ковариация  \\
+\hline \verb'\diag' & $\diag$ & Диагональная матрица  \\
+\hline \verb'\diam' & $\diam$ &  Диаметр   \\
+\hline \verb'\dist' & $\dist$ &  Расстояние   \\
+\hline \verb'\Div' & $\Div$ &   Дивергенция  \\
+\hline \verb'\Dom' & $\Dom$ &   Область определения  \\
+\hline \verb'\dom' & $\dom$ &   Область определения  \\
+\hline \verb'\End' & $\End$ &  Группа эндоморфизмов \\
+\hline \verb'\epig' & $\epig$ &  Надграфик \\
+\hline \verb'\extr' & $\extr$ &  Экстремум \\
+\hline \verb'\grad' & $\grad$ & Градиент    \\
+\hline \verb'\Graph' & $\Graph$ & График   \\
+\hline \verb'\GCD' & $\GCD$ & Наибольший общий делитель \\
+\hline \verb'\Hom' & $\Hom$ &  Пространство гомоморфизмов   \\
+\hline \verb'\id' & $\id$ &   Тождественное отображение \\
+\hline \verb'\Im' & $\Im$ &  Образ или мнимая часть   \\
+\hline \verb'\Img' & $\Img$ &  Образ или мнимая часть   \\
+\hline \verb'\ind' & $\ind$ &  Индекс векторного поля \\
+\hline \verb'\Int' & $\Int$ &  Внутренность \\
+\hline \verb'\Inn' & $\Inn$ &  Внутренние автоморфизмы \\
+\hline \verb'\Isom' & $\Isom$ & Группа изометрий \\
+\hline \verb'\Ker' & $\Ker$ &  Ядро \\
+\hline \verb'\Law' & $\Law$ &  Закон распределения \\
+\hline \verb'\LCM' & $\LCM$ & Наименьшее общее кратное \\
+\hline \verb'\Lin' & $\Lin$ &  Пространство линейных отображений \\
+\hline \verb'\Ln' & $\Ln$ &  Логарифм \\
+\hline \verb'\mes' & $\mes$ &  Мера Лебега \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline \textbf{Команда} & \textbf{Оператор} & \textbf{Описание} \\
+\hline \verb'\Mat' & $\Mat$ &  Множество матриц \\
+\hline \verb'\Orb' & $\Orb$ &  Орбита \\
+\hline \verb'\ord' & $\ord$ &  Порядок \\
+\hline \verb'\Out' & $\Out$ &  Внешние автоморфизмы   \\
+\hline \verb'\Pin' & $\Pin$ &  Пинорная группа   \\
+\hline \verb'\Prj' & $\Prj$ &  Проекция   \\
+\hline \verb'\Quot' & $\Quot$ &  Поле отношений  \\
+\hline \verb'\Ran' & $\Ran$ &   Образ отображения \\
+\hline \verb'\Re' & $\Re$ &   Вещественная часть \\
+\hline \verb'\Rea' & $\Rea$ &   Вещественная часть \\
+\hline \verb'\res' & $\res$ &   Вычет$^*$ \\
+\hline \verb'\rk' & $\rk$ &   Ранг \\
+\hline \verb'\rot' & $\rot$ & Ротор \\
+\hline \verb'\sgn' & $\sgn$ & Знак \\
+\hline \verb'\Si' & $\Si$ &  Интегральный синус \\
+\hline \verb'\Spec' & $\Spec$ &  Спектр \\
+\hline \verb'\Spin' & $\Spin$ &  Спинорная группа \\
+\hline \verb'\St' & $\St$ &  Стабилизатор \\
+\hline \verb'\supp' & $\supp$ &  Носитель \\
+\hline \verb'\Tor' & $\Tor$ & Подгруппа кручения \\
+\hline \verb'\tr' & $\tr$ &  След \\
+\hline \verb'\vp' & $\vp$ &  Главное значение \\
+\hline \verb'\Var' & $\Var$ &  Полное изменение (вариация)  \\
+\hline
+\end{tabular}
+\end{center}
+
+Звёздочками отмечены команды, в которых использование команды \verb'\limits'
+поставит индекс под значком, а не справа от него.
+
+\subsection{Окружения}
+
+\subsubsection{Теорема и Доказательство: \emph{theorem} и \emph{proof}}
+\begin{theorem}[Ферма]
+Уравнение $x^m+y^m=z^m$ неразрешимо в~целых числах при $m>2$.
+\end{theorem}
+\begin{proof}
+Слишком длинно для того, чтобы его здесь излагать.
+\end{proof}
+
+\subsubsection{Лемма: \emph{lemma}}
+\begin{lemma}[О~предельной точке]
+Каждое бесконечное ограниченное множество $E \subs \R^n$ имеет предельную точку.
+\end{lemma}
+
+\subsubsection{Утверждение: \emph{stm}}
+\begin{stm}
+Множество $E \subs \R^n$ замкнуто тогда и~только тогда, когда оно содержит все свои предельные точки.
+\end{stm}
+
+\subsubsection{Предложение: \emph{prop}}
+\begin{prop}
+Компактные подмножества метрических пространств замкнуты.
+\end{prop}
+
+\subsubsection{Задачи, Указание, Решение и Ответ: \emph{problem}, \emph{tproblem},
+\emph{hint}, \emph{solution} и \emph{answer}}
+\begin{problem}
+Что больше: $\pi^e$ или $e^\pi$?
+\end{problem}
+\begin{hint}
+Представьте экспоненту рядом Тейлора.
+\end{hint}
+\begin{solution}
+На глаз видно, что второе больше. Берём калькулятор, проверяем\ldots
+\end{solution}
+\begin{answer}
+$e^\pi > \pi^e$.
+\end{answer}
+
+А~эта задача без указания секции:
+
+\begin{tproblem}[Штейнер] Построить систему кривых минимальной длины, соединяющую $n$~данных точек пространства.
+\end{tproblem}
+
+
+\subsubsection{Пример: \emph{ex}}
+\begin{ex}
+Тривиальная топология на $\Xc$: отмеченными являются только $\es$ и~само~$\Xc$.
+\end{ex}
+
+\subsubsection{Замечание: \emph{note}}
+\begin{note}
+Это замечание здесь не по существу, но для примера сойдёт.
+\end{note}
+
+\subsubsection{Определение: \emph{df}}
+\begin{df}
+Предельной точкой множества называется точка, в~любой проколотой окрестности которой есть точки этого множества.
+\end{df}
+
+\subsubsection{Обозначение: \emph{denote}}
+\begin{denote}
+Это обозначение почти никогда не используется.
+\end{denote}
+
+\subsubsection{Обозначения: \emph{denotes}}
+\begin{denotes}
+Эти обозначения только запутывают суть дела.
+\end{denotes}
+
+\subsubsection{Следствие: \emph{imp}}
+\begin{imp}
+Любая окрестность предельной точки множества в~$\R^n$ со стандартной топологией содержит бесконечно много
+точек этого множества.
+\end{imp}
+
+\subsection{Команды, заменяющие окружения}
+
+\subsubsection{Матрицы}
+
+\begin{center}
+\begin{tabular}{cccc}
+\rulezz\verb"\mat": $\mat{a&b\\c&d}$ &
+\verb"\rbmat": $\rbmat{a&b\\c&d}$ &
+\verb"\sbmat": $\sbmat{a&b\\c&d}$ &
+\verb"\cbmat": $\cbmat{a&b\\c&d}$ \\
+\rulezz\verb"\mbmat": $\mbmat{a&b\\c&d}$ &
+\verb"\nbmat": $\nbmat{a&b\\c&d}$ &
+\verb"\rcmat": $\rcmat{a&b\\c&d}$ &
+\verb"\lcmat": $\lcmat{a&b\\c&d}$
+\end{tabular}
+\end{center}
+
+\subsubsection{Прочие команды окружения}
+
+\begin{items}{-1}
+
+\item Таблица \verb"\tab": \tab{|c|c|}{\hline A&B \\ \hline a&b\\ \hline}
+\verb'\tab{|c|c|}{\hline A&B \\ \hline a&b \\ \hline}'
+
+\item Таблица, выровненная по центру: \verb"\ctab": \ctab{|c|c|}{\hline A & B\\\hline a & b\\\hline}
+
+\item Фигурная скобка \verb"\case": $\Dc(x) := \case{1, & x\in\Q,\\0, & x\notin \Q.}$ Именно так определяется функция Дирихле.
+\begin{verbatim}
+$\Dc(x) := \case{1, & x\in\Q,\\0, & x\notin \Q.}$
+\end{verbatim}
+
+\item Фигурная скобка \verb"\bcase" для больших формул . Почувствуйте разницу.
+Слева \verb"\case", справа \verb"\bcase":
+
+$$
+\case{
+m_i r_i= \suml{\al=1}{a}\la_{\al}\pf{f_{\al}}{r_i}+\suml{\be=1}{b}\mu_{\be}b_{\be i},\\
+f_{\al}(r,t)=0,\\
+\ph_{\be}:=\suml{i=1}{n}b_{\be i}(r,t)r_i+b_{\be}(r,t)=0.
+}
+\bcase{
+&m_i r_i = \suml{\al=1}{a}\la_{\al}\pf{f_{\al}}{r_i}+\suml{\be=1}{b}\mu_{\be}b_{\be i},\\
+&f_{\al}(r,t)=0,\\
+&\ph_{\be}:=\suml{i=1}{n}b_{\be i}(r,t)r_i+b_{\be}(r,t)=0.}
+$$
+В этой команде используется окружение \texttt{aligned}. Для выравнивания по левому краю в начале каждой строки нужно ставить \texttt{\&}.
+Отличие, конечно, состоит в присутствии \texttt{displaymath}.
+Использование команды таково:
+\begin{verbatim}
+$$
+\bcase{
+Большая формула номер раз \\
+Большая формула номер два \\
+Большая формула номер три
+}
+$$
+\end{verbatim}
+
+\item Центрирование текста \verb"\cent": \cent{Этот текст расположен в центре строки.}
+
+\item Уравнение с~номером \eqn{x+y=z}
+делается так: \verb'\eqn{x+y=z}'.
+
+\item Уравнение без номера \equ{x+y=z}
+делается так: \verb'\equ{x+y=z}'.
+
+\item Система уравнений с \verb"\bcase" \eqb{\dot q &= \phm\pf{H}{p},\\ \dot p &= -\pf{H}{q}.}
+делается так: \verb'\eqb{\dot q = \phm\pf{H}{p},\\ \dot p &= -\pf{H}{q}.}'.
+
+\item Уравнение со звёздочкой вместо номера \eqa{*}{x+y=z}
+делается так: \verb'\eqa{*}{x+y=z}'.
+При этом внутренний счётчик \verb'equation' увеличивается на единицу, так что следующее нумерованное
+уравнение \eqn{x+y=z} будет иметь номер \arabic{equation},\addtocounter{equation}{-1} а~не~\arabic{equation}.
+\addtocounter{equation}{1}
+
+\item Окружения \verb'multline' и~\verb'multline*' заменяют обёртки \verb'\mln' и~\verb'\ml'
+соответственно. Ещё имеется команда \verb'\mla', которая работает так же, как и \verb'\eqa'.
+\end{items}
+
+\subsection{Нумерация, списки, пункты и подпункты}
+
+\subsubsection{Номер <<под градусом>>}
+Часто бывает, что у~номера хочется поставить кружочек, вот так: \pt{1}. Это делается с~помощью
+команды \verb'\pt' вот так: \verb'\pt{1}'. Для длинных списков предусмотрено окружение \verb'points'
+с~одним обязательным аргументом, регулирующим расстояние между элементами списка.
+Такая нумерация полезна, поскольку:
+\begin{points}{-3}
+\item Она отличается от стандартной.
+\item Часто используется в~математических текстах.
+\end{points}
+
+\subsubsection{Окружение для нумерации \emph{nums}}
+
+\begin{nums}{-3}
+\item При использовании \verb'enumerate' расстояние между строками получается очень большим
+\item Окружение \verb'nums' имеет один обязательный параметр. Это число, определяющее
+то количество пунктов, в~которое будет установлена переменная \verb'\itemsep'.
+Если указано отрицательное число, то стандартное расстояние уменьшится
+в~указанное число пунктов.
+\end{nums}
+
+\subsubsection{Окружение для списков \emph{items}}
+
+\begin{items}{-3}
+\item При использовании \verb'itemize' расстояние между строками получается очень большим
+\item Окружение \verb'items' имеет один обязательный параметр. Это число, определяющее
+то количество пунктов, в~которое будет установлена переменная \verb'\itemsep'.
+Если указано отрицательное число, то стандартное расстояние уменьшится
+в~указанное число пунктов.
+\end{items}
+
+\subsection{Картинки и всё такое прочее}
+
+\subsubsection{Команды для вставки плавающих объектов}
+
+\rightpicture{mmlogo.3}
+\hangindent=-70pt
+\hangafter=-6
+Команды \verb'\rightfloatingbox' и~\verb'\rightpicture' используются для вставки картинок
+в~документ. Конечно, для этого можно использовать и~пакет \texttt{wrapfig}, как это советует
+делать Львовский, но иногда бывает достаточно и~этого. Так, команда \verb'\rightpicture'
+была использована здесь для вставки эмблемы МехМата справа от текста. Её синтаксис
+таков: \verb'\rightpicture{filename}', где \verb'filename' означает имя включаемого файла.
+В~нашем случае это \verb'mmlogo.3'.
+
+\medskip
+
+\dmvnpiclh{mmlogo.3}{2}
+Однако эти команды на данный момент признаны авторами устаревшими. Мы не рекомендуем
+их использовать. Очередная\dmvnpicl{mmlogo.3}{1} разработка команды \verb'\dmvnpicl' и~\verb'\dmvnpicr',
+а~также их аналоги, предусматривающие возможность двигать изображение по вертикали
+команды \verb'\dmvnpicla' и~\verb'\dmvnpicra'. Здесь буква \verb'a' начало слова \emph{adjust}.
+Для управления отступами используются команды \verb'\dmvnpiclh' и~\verb'\dmvnpicrh' соответственно
+левый и~правый отступ. Картинка будет вставлена в~текст после той строки, где случилась
+команда вставки картинки. Команду управления отступом нужно писать до начала абзаца.
+В~этот абзац картинка была вставлена так: в~начале абзаца прописано
+\begin{verbatim}
+             \dmvnpiclh{mmlogo.3}{2}
+             Однако эти команды на данный момент признаны...
+\end{verbatim}
+Команда вставки картинки находится во второй строке:
+\begin{verbatim}
+... их использовать. Очередная\dmvnpicl{mmlogo.3}{1} разработка ...
+\end{verbatim}
+
+Теперь разберём аргументы команд отступа. Первый аргумент это имя файла с~картинкой,
+а~второй число, которое устанавливает параметр \verb'\hangafter'. Что это такое читайте
+\TeX book. Что касается аргументов команд вставки картинки, то первый аргумент это опять таки
+имя файла, а~второй номер рисунка. Команды, предусматривающие движение по вертикали,
+имеют третий аргумент, который определяет величину сдвига в~любых допустимых \TeX нических единицах.
+Например, если нас не устраивает слишком большой отступ сверху, можно подправить команду так:
+\begin{verbatim}
+... их использовать. Очередная\dmvnpicla{mmlogo.3}{1}{-.5pc} разработка ...
+\end{verbatim}
+
+\subsubsection{Перенос бинарных операций в формулах}
+Для переноса бинарных операций в~формулах используется команда \verb'\bw'.
+Более точно, выражение $(x \bw\otimes y) \bw\otimes z \bw= x \bw\otimes (y \bw\otimes z)$ правильно писать так:
+\begin{verbatim}
+(x \bw\otimes y) \bw\otimes z \bw= x \bw\otimes (y \bw\otimes z)
+\end{verbatim}
+
+\subsubsection{Устранение overfull-ов в оглавлении}
+Для устранения overfull-ов в~оглавлении используются
+\verb'\tocsubsectionparam' и~\verb'\tocsubsubsectionparam' для изменения третьего аргумента
+команд \verb'l@subsection' и~\verb'l@subsubsection' соответственно. Стандартные значения смотрите
+в~документации к~файлам, описывающих тот или иной класс документа: \texttt{article},
+\texttt{report}, \texttt{book},\dots
+
+\subsection{Шрифты и значки}
+
+\subsubsection{Буквы}
+
+\verb'\ab \bb \cb \db \ib \jb \kb \nb \rb \xb': 
+$\ab; \bb; \cb; \db\; \ib\; \jb\; \kb\; \nb\; \rb; \xb$.
+
+\verb$\Ac,\Bc,\Cc:$ $\Ac\Bc\Cc\Dc\Ec\Fc\Gc\Hc\Ic\Jc\Kc\Lc\Mc\Nc\Oc\Pc\Qc\Rc\Sc\Tc\Uc\Vc\Wc\Xc\Yc\Zc$.
+
+\verb$\Ab,\Bb,\Cb:$ $\Ab\Bb\Cb\Db\Eb\Fb\Gb\Hb\Ib\Jb\Kb\Lb\Mb\Nb\Ob\Pb\Qb\Rb\Sb\Tb\Ub\Vb\Wb\Xb\Yb\Zb$.
+
+\verb$\As,\Bs,\Cs:$ $\As\Bs\Cs\Ds\Es\Fs\Gs\Hs\Is\Js\Ks\Ls\Ms\Ns\Os\Ps\Qs\Rs\Ss\Ts\Us\Vs\Ws\Xs\Ys\Zs$.
+
+\verb$\Af,\Bf,\Cf:$ $\Af\Bf\Cf\Df\Ef\Ff\Gf\Hf\If\Jf\Kf\Lf\Mf\Nf\Of\Pf\Qf\Rf\Sf\Tf\Uf\Vf\Wf\Xf\Yf\Zf$.
+
+\verb$\Ag,\Bg,\Cg:$ $\Ag\Bg\Cg\Dg\Eg\Fg\Gg\Hg\Ig\Jg\Kg\Lg\Mg\Ng\Og\Pg\Qg\Rg\Sg\Tg\Ug\Vg\Wg\Xg\Yg\Zg$.
+
+\verb$\A \B \F \K \N \Q \R \T \Z \Cbb \Ebb \Hbb \Ibb \Lbb \Sbb$:
+$\quad\A\;\B\;\F\;\K\;\N\;\Q\;\R\;\T\;\Z\;\Cbb\;\Ebb\;\Hbb\;\Ibb\;\Lbb\;\Sbb$.
+
+\subsubsection{Значки}
+
+\verb$\GA \GL \PSL \SO \SU \SL \Sp \UT \ggt \hgt \glg \slg \sog \spg$:
+
+$\quad\GA\;\GL\;\PGL\;\PSL\;\SO\;\SU\;\SL\;\Sp\;\UT\;\ggt\;\hgt\;\glg\;\slg\;\sog\;\spg$.
+
+\medskip
+
+\verb$\LR \LRp \SegC \LocR  \AC \VB$:
+
+$\quad\LR\;\LRp\;\SegC\;\LocR\;\AC\;\VB$.
+
+\medskip
+
+\verb$\RP \CP$: $\quad\RP\;\CP$.
+
+\subsubsection{Греческие буквы}
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline \textbf{Новая} & \textbf{Обычная} & \textbf{Символ} &
+\textbf{Новая} & \textbf{Старая} & \textbf{Символ} \\
+\hline \verb$\al$ & \verb$\alpha$ & $\al$ &      \verb$\be$ & \verb$\beta$ & $\be$ \\
+\hline \verb$\Be$ & \verb$\textrm{B}$ & $\Be$ &  \verb$\ga$ & \verb$\gamma$ & $\ga$ \\
+\hline \verb$\Ga$ & \verb$\Gamma$ & $\Ga$ &      \verb$\de$ & \verb$\delta$ & $\de$ \\
+\hline \verb$\De$ & \verb$\Delta$ & $\De$ &      \verb$\ep$ & \verb$\varepsilon$ & $\ep$\\
+\hline \verb$\ka$ & \verb$\varkappa$ & $\ka$ &   \verb$\la$ & \verb$\lambda$ & $\la$ \\
+\hline \verb$\La$ & \verb$\Lambda$ & $\La$ &     \verb$\si$ & \verb$\sigma$ & $\si$ \\
+\hline \verb$\Sig$ & \verb$\Sigma$ & $\Sig$ &    \verb$\om$ & \verb$\omega$ & $\om$ \\
+\hline \verb$\Om$ & \verb$\Omega$ & $\Om$  &     \verb$\ph$ & \verb$\varphi$ & $\ph$ \\
+\hline \verb$\Ph$ & \verb$\Phi$ & $\Ph$  & \verb$\rh$ & \verb$\rho$ & $\rh$ \\
+\hline \verb$\ta$ & \verb$\theta$ & $\ta$ & \verb$\Ta$ & \verb$\Theta$ & $\Ta$ \\
+\hline \verb$\ze$ & \verb$\zeta$ & $\ze$ & \verb$\nab$ & \verb$\nabla$ & $\nab$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Скобки: сделайте их больше, Больше, БОЛЬШЕ!}
+Команды работают так: \verb"оманда{формула в скобках}".
+\begin{center}
+\begin{tabular}{ccc}
+\verb"\hr,\br,\Br,\bbr,\bbbr" & Круглые & $\hr{\suml{a}{b}}$, $\br{a}$, $\Br{a}$, $\bbr{a}$, $\bbbr{a}$ \\
+\verb"\hs,\bs,\BS,\bbs,\bbbs" & Квадратные & $\hs{\suml{a}{b}}$, $\bs{a}$, $\BS{a}$, $\bbs{a}$, $\bbbs{a}$ \\
+\verb"\hsr,\bsr,\Bsr,\bbsr,\bbbsr" & Правый полуинтервал & $\hsr{\suml{a}{b}}$, $\bsr{a}$, $\Bsr{a}$, $\bbsr{a}$, $\bbbsr{a}$ \\
+\verb"\hrs,\brs,\Brs,\bbrs,\bbbrs" & Левый полуинтервал & $\hrs{\suml{a}{b}}$, $\brs{a}$, $\Brs{a}$, $\bbrs{a}$, $\bbbrs{a}$ \\
+\verb"\hm,\bm,\Bm,\bbm,\bbbm" & Модуль & $\hm{\suml{a}{b}}$, $\bm{a}$, $\Bm{a}$, $\bbm{a}$, $\bbbm{a}$ \\
+\verb"\hc,\bc,\BC,\bbc,\bbbc" & Фигурные & $\hc{\suml{a}{b}}$, $\bc{a}$, $\BC{a}$, $\bbc{a}$, $\bbbc{a}$ \\
+\verb"\hn,\bn,\Bn,\bbn,\bbbn" & Норма & $\hn{\suml{a}{b}}$, $\bn{a}$, $\Bn{a}$, $\bbn{a}$, $\bbbn{a}$ \\
+\verb"\ha,\ba,\Ba,\bba,\bbba" & Угловые & $\ha{\suml{a}{b}}$, $\ba{a}$, $\Ba{a}$, $\bba{a}$, $\bbba{a}$ \\
+\verb"\hfl,\bfl,\Bfl,\bbfl,\bbbfl" & Нижние & $\hfl{\suml{a}{b}}$, $\bfl{a}$, $\Bfl{a}$, $\bbfl{a}$, $\bbbfl{a}$ \\
+\verb"\hce,\bce,\Bce,\bbce,\bbbce" & Верхние & $\hce{\suml{a}{b}}$, $\bce{a}$, $\Bce{a}$, $\bbce{a}$, $\bbbce{a}$ \\
+\end{tabular}
+\end{center}
+\begin{ex}
+Чтобы не думать, какой высоты скобки нужно ставить в~сложных выражениях типа
+$$
+  \hs{\sqrt{\hr{\frac 1n + n}^n} + \hc{\frac{\sqrt{n}}{2}}^2},
+$$
+их лучше сразу делать выровненными: \verb'\hs{\sqrt{\hr{\frac 1n + n}^n} + \hc{\frac{\sqrt n}{2}}^2}'.
+\end{ex}
+
+Фигурные скобки для внутристрочных комментариев: \verb'\lcomm' и~\verb'\rcomm'.
+Пример: $\hn{x + y} \le \lcomm$ неравенство Минковского $\rcomm \le \hn{x} + \hn{y}$.
+\begin{verbatim}
+$\hn{x + y} \le \lcomm$ неравенство Минковского $\rcomm \le \hn{x} + \hn{y}$
+\end{verbatim}
+
+\subsection{<<Пусть $\la_1$, и так далее, $\la_2$ собственные значения\ldots>>}
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline \textbf{Команда} & \textbf{Назначение} & \textbf{Вид} & \textbf{Команда} & \textbf{Назначение} & \textbf{Вид} \\
+\hline \verb$\sco$ & Запятые & $a_1\sco a_n$ & \verb$\spl$ & Сумма & $a_1\spl a_n$ \\
+\hline \verb$\sd$ & Произведение & $a_1\sd a_n$ & \verb$\st$ & Прямое произведение & $G_1\st G_n$ \\
+\hline \verb$\sop$ & Прямая сумма & $G_1\sop G_n$ & \verb$\sot$ & Тензорное произведение & $V_1\sot V_n$ \\
+\hline \verb$\sw$ & Внешнее произведение & $dx_1 \sw dx_n$ &  \verb'\sa' & Конъюнкция & $A_1\sa A_n$\\
+\hline \verb$\sle$ & По возрастанию & $a_1 \sle a_n$ &  \verb'\sge' & По убыванию & $a_1\sge a_n$\\
+\hline \verb$\sles$ & Строго по возрастанию & $a_1 \sles a_n$ &  \verb'\sgre' & Строго по убыванию & $a_1\sgre a_n$\\
+\hline
+\end{tabular}
+\end{center}
+Кроме того, имеется команда \verb'\etc', которая означает <<$\etc$>>.
+
+
+\subsection{Математические операции с <<пределами>>}
+
+\subsubsection{Суммы}
+
+\begin{ex}
+$\suml{n=1}{\bes}\frac1n$ делается, например так: \verb"$\suml{n=1}{\bes}\frac1n$", или так:
+\verb"$\sumnui\frac1n$".
+\end{ex}
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\suml[2]' & $\suml{i=j}{k}a_i$ \\
+\hline\rulez\verb'\sums[1]' & $\sums{i \in I}$ \\
+\hline\rulez\verb'\sumkui' & $\sumkui$ \\
+\hline\rulez\verb'\sumnui' & $\sumnui$ \\
+\hline\rulez\verb'\sumiui' & $\sumiui$ \\
+\hline\rulez\verb'\sumkzi' & $\sumkzi$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\sumnzi' & $\sumnzi$ \\
+\hline\rulez\verb'\sumizi' & $\sumizi$ \\
+\hline\rulez\verb'\sumkun' & $\sumkun$ \\
+\hline\rulez\verb'\sumiun' & $\sumiun$ \\
+\hline\rulez\verb'\sumkzn' & $\sumkzn$ \\
+\hline\rulez\verb'\sumizn' & $\sumizn$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\sumkum' & $\sumkum$ \\
+\hline\rulez\verb'\sumium' & $\sumium$ \\
+\hline\rulez\verb'\sumkzm' & $\sumkzm$ \\
+\hline\rulez\verb'\sumizm' & $\sumizm$ \\
+\hline\rulez\verb'\sumun' & $\sumun$ \\
+\hline\rulez\verb'\sumzn' & $\sumzn$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\sumui' & $\sumui$ \\
+\hline\rulez\verb'\sumzi' & $\sumzi$ \\
+\hline\rulez\verb'\sumn' & $\sumn$ \\
+\hline\rulez\verb'\sumi' & $\sumi$ \\
+\hline
+\end{tabular}\hfil}\medskip
+
+\subsubsection{Произведения, пределы и прочее}
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\oplusl[2]' & $ \oplusl{i=1}{n}V_i$ \\
+\hline\rulez\verb'\otimesl[2]' & $ \otimesl{i=1}{n}V_i$ \\
+\hline\rulez\verb'\opluss[1]' & $ \opluss{i \in I}V_i$ \\
+\hline\rulez\verb'\otimess[1]' & $ \otimess{i \in I}V_i$ \\
+\hline\rulez\verb'\prodl[2]' & $ \prodl{i=j}{k}p_i$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\prods[1]' & $ \prods{i \in I}p_i$ \\
+\hline\rulez\verb'\liml[1]' & $ \liml{n\ra\infty} x_n$ \\
+\hline\rulez\verb'\ampl[2]' & $ \ampl{i=1}{n} A_i $ \\
+\hline\rulez\verb'\amps[1]' & $ \amps{i\neq j} (x_i=x_j)$ \\
+\hline\rulez\verb'\Varl[1]' & $ \Varl{\ga}$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\infl[1]' & $ \infl{i \in I}p_i$ \\
+\hline\rulez\verb'\supl[1]' & $ \supl{i \in I}p_i$ \\
+\hline\rulez\verb'\maxl[1]' & $ \maxl{i \in I}p_i$ \\
+\hline\rulez\verb'\minl[1]' & $ \minl{i \in I}p_i$ \\
+\hline\rulez\verb'\uliml[1]' & $ \uliml{i \in I}p_i$ \\
+\hline\rulez\verb'\lliml[1]' & $ \lliml{i \in I}p_i$ \\
+\hline
+\end{tabular}\hfil}\medskip
+
+\subsubsection{Объединения и пересечения}
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\cupl[2]' & $\cupl{i=j}{k}a_i$ \\
+\hline\rulez\verb'\cups[1]' & $\cups{i \in I}$ \\
+\hline\rulez\verb'\cupkui' & $\cupkui$ \\
+\hline\rulez\verb'\cupnui' & $\cupnui$ \\
+\hline\rulez\verb'\cupiui' & $\cupiui$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\cupkzi' & $\cupkzi$ \\
+\hline\rulez\verb'\cupnzi' & $\cupnzi$ \\
+\hline\rulez\verb'\cupizi' & $\cupizi$ \\
+\hline\rulez\verb'\cupkun' & $\cupkun$ \\
+\hline\rulez\verb'\cupiun' & $\cupiun$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\cupkzn' & $\cupkzn$ \\
+\hline\rulez\verb'\cupizn' & $\cupizn$ \\
+\hline\rulez\verb'\cupun' & $\cupun$ \\
+\hline\rulez\verb'\cupzn' & $\cupzn$ \\
+\hline\rulez\verb'\cupui' & $\cupui$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\cupzi' & $\cupzi$ \\
+\hline\rulez\verb'\cupn' & $\cupn$ \\
+\hline\rulez\verb'\cupi' & $\cupi$ \\
+\hline\rulez\verb'\cupsql[2]' & $ \cupsql{i=1}{\bes}E_i$ \\
+\hline\rulez\verb'\cupsqs[1]' & $ \cupsqs{i\in I}E_i$ \\
+\hline
+\end{tabular}\hfil}\medskip
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\capl[2]' & $\capl{i=j}{k}a_i$ \\
+\hline\rulez\verb'\caps[1]' & $\caps{i \in I}$ \\
+\hline\rulez\verb'\capkui' & $\capkui$ \\
+\hline\rulez\verb'\capnui' & $\capnui$ \\
+\hline\rulez\verb'\capiui' & $\capiui$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\capkzi' & $\capkzi$ \\
+\hline\rulez\verb'\capnzi' & $\capnzi$ \\
+\hline\rulez\verb'\capizi' & $\capizi$ \\
+\hline\rulez\verb'\capkun' & $\capkun$ \\
+\hline\rulez\verb'\capiun' & $\capiun$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\capkzn' & $\capkzn$ \\
+\hline\rulez\verb'\capizn' & $\capizn$ \\
+\hline\rulez\verb'\capun' & $\capun$ \\
+\hline\rulez\verb'\capzn' & $\capzn$ \\
+\hline\rulez\verb'\capui' & $\capui$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\capzi' & $\capzi$ \\
+\hline\rulez\verb'\capn' & $\capn$ \\
+\hline\rulez\verb'\capi' & $\capi$ \\
+\hline
+\end{tabular}\hfil}\medskip
+
+\subsubsection{Интегралы}
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\intl[2]' & $ \intl{a}{b}f(x)\,dx$ \\
+\hline\rulez\verb'\ints[1]' & $ \ints{A}f(x)\,dx$ \\
+\hline\rulez\verb'\iints[1]' & $ \iints{A}f(x,y)\,dx\,dy$ \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|}
+\hline\rulez\verb'\iiints[1]' & $ \iiints{A}f(x,y,z)\,dx\,dy\,dz$ \\
+\hline\rulez\verb'\idotsints[1]' & $ \idotsints{A}f(x)\,dx$ \\
+\hline\rulez\verb'\oints[1]' & $ \oints{A}f(x,y)\,dx\,dy$ \\
+\hline
+\end{tabular}\hfil}\medskip
+
+\subsection{Часто употребляемые в математических текстах обозначения}
+
+\subsubsection{Сокращения для стрелочек разного вида}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline\verb'\to' & \verb'\rightarrow' & $a \to b$ \\
+\hline\verb'\ra' & \verb'\rightarrow' &   $x_n \ra x$     \\
+\hline\verb'\Ra' & \verb'\Rightarrow' &   $A\Ra B$     \\
+\hline\verb'\nra' & \verb'\nrightarrow' &     $x_n \nra 0$   \\
+\hline\verb'\longra' & \verb'\longrightarrow' &  $f_n \longra f$      \\
+\hline\verb'\rra' & \verb'\rightrightarrows' &   $f_n \rra f$     \\
+\hline\verb'\xra' & \verb'\xrightarrow' &      $f_n \xra{\mu} f$  \\
+\hline\verb'\Lra' & \verb'\Leftrightarrow' &   $A \Lra B$     \\
+\hline\verb'\lra' & \verb'\leftrightarrow' &    туда $\lra$ сюда    \\
+\hline\verb'\ot' & \verb'\leftarrow' &   $x \ot x_n$     \\
+\hline\verb'\ar' & \verb'\leftarrow' &  $x \ar x_n$      \\
+\hline\verb'\lar' & \verb'\leftarrow' &  $x \lar x_n$      \\
+\hline\verb'\Lar' & \verb'\Leftarrow' &   $B \Lar A$     \\
+\hline\verb'\nla' & \verb'\nleftarrow' &    $x \nla x_n$    \\
+\hline\verb'\longla' & \verb'\longleftarrow' &   $f \longla f_n$     \\
+\hline\verb'\lla' & \verb'\leftleftarrows' &    $f \lla f_n$    \\
+\hline\verb'\xla' & \verb'\xleftarrow' &     $f \xla{\nu} f_n$ \\
+\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline\verb'\up' & \verb'\uparrow' &     $A_i \up A$   \\
+\hline\verb'\inj' & \verb'\hookrightarrow' &     $K \inj L$   \\
+\hline\verb'\map[1]' & \verb'\stackrel{#1}{\longrightarrow}' &  $A \map{f} B$      \\
+\hline\verb'\corr[1]' & \verb'\stackrel{#1}{\longmapsto}' &     $g \corr{\ph} \ph(g)$   \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Сходимость, равенства тп}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Команда} & \textbf{Пример} & \textbf{Вид} & \textbf{Описание} \\
+\hline\rulez
+\verb'\convu'   & \verb'f_n \convu{X} f'                   & $f_n \convu{X} f$ &      Равномерная сходимость      \\
+\hline\rulez
+\verb'\convs'  & \verb'A_n \convs A'                      & $A_n \convs A$ &    Сильная сходимость    \\
+\hline\rulez
+\verb'\convw'  & \verb'x_n \convw x'                      & $x_n \convw x$ &    Слабая сходимость    \\
+\hline\rulez
+\verb'\convws'  & \verb'x_n \convws x'                      & $x_n \convws x$ &    $*$-слабая сходимость    \\
+\hline\rulez
+\verb'\convas'  & \verb'\xi_n \convas \xi'                 & $\xi_n \convas \xi$ &    Сходимость почти наверное    \\
+\hline\rulez
+\verb'\convasu' & \verb'\xi_n \convasu \xi'                & $\xi_n \convasu \xi$ &   Монотонная сходимость п.н. \\
+\hline\rulez
+\verb'\convasl' & \verb'\xi_n \convasl \xi'                & $\xi_n \convasl \xi$ &   Монотонная сходимость п.н. \\
+\hline\rulez
+\verb'\convp'   & \verb'\xi_n \convp \xi'                  & $\xi_n \convp \xi$ &   Сходимость по вероятности \\
+\hline\rulez
+\verb'\convd'   & \verb'\xi_n \convd \xi'                  & $\xi_n \convd \xi$ &   Сходимость по распределению \\
+\hline\rulez
+\verb'\convae'  & \verb'f_n \convae f'                     & $f_n \convae f$ &  Сходимость почти всюду \\
+\hline\rulez
+\verb'\convaeu' & \verb'f_n \convaeu f'                    & $f_n \convaeu f$ &  Монотонная сходимость п.в. \\
+\hline\rulez
+\verb'\convael' & \verb'f_n \convael f'                    & $f_n \convael f$ &  Монотонная сходимость п.в. \\
+\hline\rulez
+\verb'\eqas'    & \verb'\xi \eqas \eta'                    & $\xi \eqas \eta$ &  Равенство почти наверное \\
+\hline\rulez
+\verb'\eqae'    & \verb'f \eqae g'                         & $f \eqae g$ &  Равенство почти всюду \\
+\hline\rulez
+\verb'\eqdef'   & \verb'Gx \eqdef \hc{g x \vl g \in G}'     & $Gx \eqdef \hc{gx \vl g \in G}$ &  Равенство по определению \\
+\hline\rulez
+\verb'\eqvl'    & \verb'\Ac\Bc v \eqvl{комм.}{20} \Bc\Ac v' & $\Ac\Bc v \eqvl{комм.}{20} \Bc\Ac v$ & Длинное равенство с надписью \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\subsubsection{Прочие сокращения и новые определения}
+
+\hbox to \textwidth{\hfil
+\begin{tabular}{|c|c|c|}
+\hline\rulez\verb'\ge'     & \verb'\geqslant'     & $a\ge b$   \\
+\hline\rulez\verb'\le'     & \verb'\leqslant'     & $a\le b$   \\
+\hline\rulez\verb'\nge'    & \verb'\ngeqslant'    & $a \nge b$     \\
+\hline\rulez\verb'\nle'    & \verb'\nleqslant'    & $a \nle b$     \\
+\hline\rulez\verb'\exi'    & \verb'\,\exists\,'   & $\exi x \in X$    \\
+\hline\rulez\verb'\exu'    & \verb'\,\exists\,!\;'& $\exu x \in X$      \\
+\hline\rulez\verb'\fa'     & \verb'\,\forall\,'   & $\fa \ep > 0$   \\
+\hline\rulez\verb'\es'     & \verb'\varnothing'   & $\es$, а не $\emptyset$!   \\
+\hline\rulez\verb'\bes'    & \verb'\infty'        & $\bes$ по русски    \\
+\hline\rulez\verb'\pd'     & \verb'\partial'      & $\frac{\pd}{\pd ё}$     \\
+\hline\rulez\verb'\subs'   & \verb'\subset'       & $A \subs B$     \\
+\hline\rulez\verb'\sups'   & \verb'\supset'       & $B \sups A$    \\
+\hline\rulez\verb'\subseq' & \verb'\subseteq'     & $A \subseq B$    \\
+\hline\rulez\verb'\supseq' & \verb'\supseteq'     & $B \supseq A$   \\
+\hline\rulez\verb'\wo'     & \verb'\smallsetminus'& $\R \wo \hc{0}$   \\
+\hline\rulez\verb'\ol'     & \verb'\overline'     & $\ol x$   \\
+\hline\rulez\verb'\os'     & \verb'\overset'      & $\os{\circ}{A}$    \\
+\hline\rulez\verb'\us'     & \verb'\underset'     & $\us{\circ}{\forall}$    \\
+\hline\rulez\verb'\ul'     & \verb'\underline'    & $\ul x$    \\
+\hline\rulez\verb'\wh'     & \verb'\widehat'      & $x_1\sd \wh{x_i}\sd x_n$   \\
+\hline\rulez\verb'\wt'     & \verb'\widetilde'    & $\wt{Y}$    \\
+\hline\rulez\verb'\ub'     & \verb'\underbrace'   & $\ub{g^{-1} x g}$    \\
+\hline\rulez\verb'\ob'     & \verb'\overbrace'    & $\ob{h_1 h_2}$    \\
+\hline
+\end{tabular}\hfil
+\begin{tabular}{|c|c|c|}
+\hline\rulez\verb'\cln'     & \verb'\colon'                & $f\cln\Cbb\ra\Cbb$    \\
+\hline\rulez\verb'\wg'      & \verb'\wedge'                & $dx_1 \wg dx_2$   \\
+\hline\rulez\verb'\ulim'    & \verb'\varlimsup'            & $\ulim$    \\
+\hline\rulez\verb'\llim'    & \verb'\varliminf'            & $\llim$    \\
+\hline\rulez\verb'\tri'     & \verb'\triangle'             & $\triangle$ \\
+\hline\rulez\verb'\swo'     & \verb'\mathbin{\triangle}'   & $A \swo B$ \\
+\hline\rulez\verb'\lhdp'    & \verb'\leftthreetimes'       & $\lhdp$       \\
+\hline\rulez\verb'\rhdp'    & \verb'\rightthreetimes'      & $\rhdp$       \\
+\hline\rulez\verb'\nl'      & \verb'\lhd'                  & $\nl$ \\
+\hline\rulez\verb'\nr'      & \verb'\rhd'                  & $\nr$  \\
+\hline\rulez\verb'\divs'    & \verb'\,\bigl\rvert\,'       & $m \divs n$     \\
+\hline\rulez\verb'\ndivs'   & \verb'\!\nmid\!'             & $n \ndivs m$ \\
+\hline\rulez\verb'\vl'      & \verb'\;\rvert\;'            & $\hc{g\in G \vl gx = x}$ \\
+\hline\rulez\verb'\bvl'     & \verb'\;\big\rvert\;'        & $\bc{g \in G \bvl gx = x}$   \\
+\hline\rulez\verb'\phm'     & \verb'\phantom{-}'           & $\rbmat{\phm a & b \\ -b & a}$ \\
+\hline\rulez\verb'\fact[2]' & Смотрите исходник            & $\fact{G}{\Ker \ph} \cong \Img \ph$    \\
+\hline\rulez\verb'\evu[3]'  & Смотрите исходник            & $u\evu{x=x_0}{9pt}{.6pc}$    \\
+\hline\rulez\verb'\ev[2]'   & \verb'\evu{#1}{#2}{.65pc}}'  & $u\ev{x=x_0}{6pt}$    \\
+\hline\rulez\verb'\evn[1]'  & \verb'\ev{#1}{10pt}'         & $A\evn{V}$    \\
+\hline\rulez\verb'\usd[1]'  & \verb'\ol{\mathrm{S}}_{{#1}}'& $\usd{P}$  \\
+\hline\rulez\verb'\lsd[1]'  & \verb'\ul{\mathrm{S}}_{{#1}}'& $\lsd{P}$   \\
+\hline\rulez\verb'\pf[2]'   & \verb'\frac{\pd #1}{\pd #2}' & $\pf{ш}{щ}$  \\
+\hline\rulez\verb'\dv'      & Смотрите исходник            & $a\dv b$ \\
+\hline
+\end{tabular}\hfil}\medskip
+\tbk
+\end{document}
