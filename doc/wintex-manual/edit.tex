@@ -1,0 +1,43 @@
+\section{Текстовый редактор.}
+Мы будем использовать {\bf Eclipse IDE}. Скачиваем с сайта \url{www.eclipse.org/downloads/} 
+{\bf Eclipse Classic}. На момент написания мануала последней версией была $4.2$. 
+Если сомневаетесь насчет разрядности системы -- качайте 32-битную версию. 
+Скачанный {\it .rar} архив распаковываете с помощью WinRar(правой кнопкой на архив → Распаковать сюда).
+В появившейся папке {\it eclipse} есть файл {\bf eclipse.exe} c круглой темной иконкой. Он то нам и нужен.
+Стоит сделать ярлык на рабочем столе(Правой кнопкой → Отправить → Рабочий стол). Запускаем…
+
+Прежде, чем начать работу, необходимо:
+\begin{enumerate}
+  \item Поменять кодировку по умолчанию. \par
+  	Window → Preferences → General → Workspace \par
+  	\begin{itemize}
+  	  \item Text File Encoding → Other → UTF-8
+  	  \item New Text File Line Delimiter → Other → Unix  	  
+  	\end{itemize}
+  \item Установить LaTeX плагин \par
+  	\begin{enumerate}
+ 		\item Help → Install New Software
+ 		\item Work with: «http://texlipse.sourceforge.net» →  Add
+ 		\item Отметьте галочками все предложенные пункты, и нажимаете кнопку \ttfamily{Next},
+ 		 соглашаясь со всеми лицензиями(Eclipse и GNU GPL)
+ 	\end{enumerate}
+\end{enumerate}
+
+Прекрасно, теперь можно создать новый \LaTeX{} проект:
+\begin{enumerate}
+\item File → New → Other → Texlispe → LaTeX project.\par
+	\begin{itemize} 
+	\item Выберите имя проекта, как шаблон рекомендую «empty».
+ 	\item Output Format → pdf
+ 	\item Build command → xelatex.exe
+\end{itemize}
+\item Выберете название результирующего {\it .pdf} файла и головного {\it .tex}.
+Если проект создается поверх уже существующих файлов, выберите нужным образом головной файл. Остальные подхватятся сами.
+\item Что бы скомпилировать документ в {\it .pdf} файл, используйте \par
+Project → Build Project.
+\par {\it \bf ВАЖНО:} Компиляция не будет успешной, если результирующий файл открыт в просмотрщике. Вам следует его сначала закрыть. Если вы
+все-таки запустили сборку \\с запущенным просмотрщиком, то вам следует закрыть просмотрщик, запустить Project→ Clean, а потом снова сборку. Эта проблема проявляется с Adobe Acrobat Reader.
+\end{enumerate}
+На самом деле, {\bf Eclipse} умеет намного больше, но это самый минимум. Единственное, что ещё стоит упомянуть -- автодополнение по 
+Ctrl+Space. Ещё есть панель {\bf Problems}, по умолчанию в крайней правой строчке окна. Её можно перенести вниз, и она будет расшифровывать 
+то, что пишет Xe\LaTeX{}.

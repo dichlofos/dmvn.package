@@ -1,0 +1,21 @@
+\documentclass[unicode, 10pt, a4paper, oneside, fleqn]{article}
+\usepackage{dmvn}
+\usepackage{polyglossia}
+\usepackage{unicode-math}
+\usepackage{hyperref}
+\setmainfont{DejaVu Serif}  %% задаёт основной шрифт документа
+\setsansfont{DejaVu Sans}  %% задаёт шрифт без засечек
+\setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
+\setmathfont{Asana-Math.ttf}
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}  %% устанавливает поведение шрифтов по умолчанию
+\begin{document}
+\tableofcontents
+\include{intro}
+\include{compile}
+\include{pack}
+\include{edit}
+\include{unicode}
+\include{viewer}
+\include{hello}
+\include{end}
+\end{document}

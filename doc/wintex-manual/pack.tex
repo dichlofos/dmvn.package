@@ -1,0 +1,16 @@
+OB\section{Установка дополнительных пакетов.}
+
+\subsection{Unicode Math}
+Выполните в консоли (Нажмите Win+r, наберите {\ttfamily cmd} и нажмите {\ttfamily Enter})\par
+{\ttfamily tlmgr update unicode-math}
+
+\subsection{Dmvn Package}
+\begin{enumerate}
+  \item Откройте страницу \url{https://bitbucket.org/dmvn/dmvn.package}.
+  \item Нажмите кнопку «get source» и скачайте пакет в предпочтительном для вас формате. Альтернативно \\
+    и предпочтительнее, можно склонировать репозиторий. 
+  \item Найдите в этом архиве папку `{\ttfamily dmvn}'  и переместите её в `{\ttfamily /texmf-local/tex/latex/local}' относительно папки, в которую установился
+  TeXLive(Вероятно, {\ttfamily C:\\texlive}) 
+  \item Выполните в консоли комманду {\ttfamily mktexlsr}.
+\end{enumerate}
+

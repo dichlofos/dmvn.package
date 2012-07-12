@@ -1,0 +1,23 @@
+\section{Привет, Мир!}
+
+Теперь, когда мы установили все необходимые инструменты, пора посмотреть,
+как должен выглядеть документ. В приведенном примере все строчки в преамбуле обязательны, 
+кроме {\ttfamily dmvn}. Если dmvn используется, то лучше его ставить второй строчкой. 
+Шрифты, разумеется, можно варьировать.
+
+\begin{verbatim}
+
+\documentclass[unicode, 10pt, a4paper, oneside, fleqn]{article}
+\usepackage{dmvn}
+\usepackage{polyglossia}
+\usepackage{unicode-math} 
+\setmainfont{DejaVu Serif}  %% задаёт основной шрифт документа
+\setsansfont{DejaVu Sans}  %% задаёт шрифт без засечек
+\setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
+\setmathfont{Asana-Math.ttf}
+ %% устанавливает поведение шрифтов по умолчанию
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text} 
+\begin{document}
+Несомненно, $¼+¾ = 1$
+\end{document}
+\end{verbatim}
