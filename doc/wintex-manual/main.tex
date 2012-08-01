@@ -1,13 +1,14 @@
-\documentclass[unicode, 10pt, a4paper, oneside, fleqn]{article}
+\documentclass[unicode,10pt]{article}
 \usepackage{dmvn}
 \usepackage{polyglossia}
 \usepackage{unicode-math}
+\usepackage{fontspec}
 \usepackage{hyperref}
-\setmainfont{DejaVu Serif}  %% задаёт основной шрифт документа
-\setsansfont{DejaVu Sans}  %% задаёт шрифт без засечек
-\setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
-\setmathfont{Asana-Math.ttf}
-\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}  %% устанавливает поведение шрифтов по умолчанию
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\setmathfont{Latin Modern Math}
 \begin{document}
 \tableofcontents
 \include{intro}
@@ -17,5 +18,6 @@
 \include{unicode}
 \include{viewer}
 \include{hello}
+\include{style-guide}
 \include{end}
 \end{document}

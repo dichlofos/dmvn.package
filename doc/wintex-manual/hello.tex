@@ -1,22 +1,28 @@
 \section{Привет, Мир!}
 
-Теперь, когда мы установили все необходимые инструменты, пора посмотреть,
-как должен выглядеть документ. В приведенном примере все строчки в преамбуле обязательны, 
-кроме {\ttfamily dmvn}. Если dmvn используется, то лучше его ставить второй строчкой. 
-Шрифты, разумеется, можно варьировать.
-
+Теперь, когда мы установили все необходимые инструменты, пора
+посмотреть, как должен выглядеть документ. В приведенном примере все
+строчки в преамбуле обязательны, кроме {\ttfamily dmvn}. Если dmvn
+используется, то лучше его ставить второй строчкой.  Шрифты крайне
+желательно использовать именно эти, ибо они они поддерживают наилучшее
+визуальное сходство с \LaTeX. У них есть большой недостаток -- нельзя
+использовать многие юникодовские символы вне math-mode.  Price of
+peace…
 \begin{verbatim}
 
-\documentclass[unicode, 10pt, a4paper, oneside, fleqn]{article}
+\documentclass[unicode,10pt]{article}
 \usepackage{dmvn}
 \usepackage{polyglossia}
-\usepackage{unicode-math} 
-\setmainfont{DejaVu Serif}  %% задаёт основной шрифт документа
-\setsansfont{DejaVu Sans}  %% задаёт шрифт без засечек
-\setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
-\setmathfont{Asana-Math.ttf}
- %% устанавливает поведение шрифтов по умолчанию
-\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text} 
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\setmathfont{Latin Modern Math}
+
+
+
 \begin{document}
 Несомненно, $¼+¾ = 1$
 \end{document}
