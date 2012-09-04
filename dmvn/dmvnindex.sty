@@ -1,5 +1,4 @@
 \ProvidesPackage{dmvnindex}
-
 % Some index magic, imported from math history lection.
 \newcommand{\auth}[1]{\index{#1}\textsc{#1}}
 \newcommand{\sauth}[2]{\index{#2}\textsc{#1}}
@@ -23,11 +22,15 @@
   \vskip1pt
 %  \hrule width \mytextwidth\par
 }
-\newcommand{\authorcomment}[1]
-{{
-  $[$
-      {#1}
-      $]$
-}}
 %% Very nice looking author comment
 \newenvironment{petit}{\medskip\hrule\smallskip\footnotesize}{\par\smallskip\hrule\medskip}
+% ==============================
+% All TeX Turing fullness magic.
+% Warning! Most of the tricks return
+% unreadable error messages in case of misuse.11
+\newcounter{dmvnint}
+\newcommand{\inc}[1]{%
+\setcounter{dmvnint}{#1}
+\addtocounter{dmvnint}{1}
+\arabic{dmvnint}
+}

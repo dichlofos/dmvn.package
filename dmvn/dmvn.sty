@@ -7,11 +7,6 @@
 \RequirePackage{amssymb,amsmath,mathrsfs}
 \RequirePackage{epsf}
 
- %% \RequirePackage{russlh}
- %% \RequirePackage{mathlh}
- %% \RequirePackage{russcorr}
- %% \RequirePackage{russadd}
-
 \newif\if@simple
 \DeclareOption{simple}{\@simpletrue}
 \DeclareOption{nosimple}{\@simplefalse}
@@ -207,7 +202,7 @@
 \if@diagram
   \input diagram
 \else
-  % Diagram package destroys pictures made with put() statements 
+  % Diagram package destroys pictures made with put() statements
 \fi
 
 \endinput

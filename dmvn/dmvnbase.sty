@@ -497,6 +497,14 @@
 \newcommand{\sles}{\bw<\ldots\bw<}                                                      % sequenced less
 \newcommand{\sgre}{\bw>\ldots\bw>}                                                      % sequenced greater
 \newcommand{\sa}{\bw\&\ldots\bw\&}                                                      % sequenced conjunction
+% ========================================
+% Enums of different styles
+\newcommand{\enum}[3]{{#1}_{#2}, {#1}_{\inc{#2}}\sco {#1}_{#3}}         % Unsafe to use. Prefer specialisation, if possible
+\newcommand{\enumsub}[4]{{#1}_{{#2}_{#3}},{#1}_{{#2}_{\inc{#3}}}\sco {#1}_{{#2}_{#4}}}
+\newcommand{\enumun}[1]{\enum{#1}1n}
+\newcommand{\enumum}[1]{\enum{#1}1m}
+\newcommand{\enumzn}[1]{\enum{#1}0n}
+\newcommand{\enuml}[2]{\enum{#1}{1}{#2}}
 
 % ===============================================================
 % Common usage sums, limits, integrals, products
@@ -605,6 +613,15 @@
 \newcommand{\idotsints}[1]{\idotsint\limits_{{#1}}}                                     % idotsintegral over set
 \newcommand{\oints}[1]{\oint\limits_{{#1}}}                                             % ointegral over set
 
+% ==============================================================
+% Limited big boolean functions.
+% ==============================================================
+\newcommand{\veel}[2]{\bigvee\limits_{#1}^{#2}}
+\newcommand{\veeiun}{\veel{i=1}n}
+\newcommand{\veejun}{\veel{j=1}n}
+\newcommand{\wedgel}[2]{\bigwedge\limits_{#1}^{#2}}
+\newcommand{\wedgeiun}{\wedgel{i=1}n}
+\newcommand{\wedgejun}{\wedgel{j=1}n}
 % ===============================================================
 % Reductions
 % ===============================================================
