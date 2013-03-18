@@ -4,12 +4,15 @@
 \usepackage{unicode-math}
 \usepackage{fontspec}
 \usepackage{hyperref}
-\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
+\usepackage{verbatim}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
 \setmathfont{Latin Modern Math}
 \begin{document}
+\addfontfeatures{Mapping=tex-text}
 \tableofcontents
 \include{intro}
 \include{compile}
