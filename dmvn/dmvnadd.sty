@@ -1,0 +1,37 @@
+\ProvidesPackage{dmvnadd}[2006/06/01 v1.36 DMVN Add LaTeX Package]
+\RequirePackage{amssymb,amsmath,mathrsfs}
+
+\RequirePackage{xspace}
+
+% ------------------ команды типа \те (т.е.) --------------------
+
+% Набирайте "т.е." командой \те . Остальное -- аналогично.
+% Теперь можно не беспокоиться о пробелах после этих команд.
+% Например, можно наравне с
+%     ..., \те\ ...
+%     ..., \те{} ...
+% писать просто
+%     ..., \те ...
+%
+
+\newcommand*{\те}{т.\,е.\xspace}
+\newcommand*{\Те}{Т.\,е.\xspace}
+\newcommand*{\тк}{т.\,к.\xspace}
+\newcommand*{\Тк}{Т.\,к.\xspace}
+\newcommand*{\итд}{и~т.\,д.\xspace}
+\newcommand*{\итп}{и~т.\,п.\xspace}
+
+%===========================
+% here is utf8 encoding
+% Code is derived from russadd.sty by Serge Lvovski
+%===========================
+
+\newcommand*{\клей}{\nobreak\hskip\z@skip}
+\DeclareRobustCommand*{\д}{\клей\hbox{-}\клей}
+\DeclareRobustCommand*{\Д}{\клей\hbox{-}\hskip\z@skip}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\клей}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\hskip\z@skip}
+\DeclareRobustCommand*{\т}{~\textemdash{} }
+\DeclareRobustCommand*{\Т}{~\textemdash{} }
+
+\endinput
