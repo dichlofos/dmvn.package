@@ -1,5 +1,6 @@
 \ProvidesPackage{dmvnbase}[2006/06/01 v1.36 DMVN Base LaTeX Package]
 \RequirePackage{amssymb,amsmath,mathrsfs}
+\RequirePackage{etoolbox}  % for command existance checking
 
 % ===============================================================
 % DMVN Local Coordinates
@@ -7,15 +8,6 @@
 \newcommand{\dmvnwebsite}{\texttt{http:/\kern-.1em/dmvn.mexmat.net}}
 \newcommand{\dmvnwebsitemirror}{\texttt{http:/\kern-.1em/dmvn.mexmat.ru}}
 \newcommand{\dmvnmail}{\texttt{dmvn@mccme.ru}}
-
-%===========================
-% here is utf8 encoding
-%===========================
-
-% right hyphen rules
-
-% \hyphenation{ес-ли}
-% \hyphenation{СССР МЦНМО РФФИ ГИБДД}
 
 % ===============================================================
 % Algebraic operators
@@ -87,15 +79,17 @@
 \DeclareMathOperator{\Var}{Var}
 
 % Russian-style functions
-\DeclareMathOperator*{\tg}{tg}
-\DeclareMathOperator*{\arctg}{arctg}
-% Sinus hyperbolici (sinh)
-\DeclareMathOperator*{\sh}{sh}
-% Cosinus hyperbolici
-\DeclareMathOperator*{\ch}{ch}
 
+% tan
+\ifcsundef{tg}{\DeclareMathOperator*{\tg}{tg}}{}
+% atan
+\ifcsundef{arctg}{\DeclareMathOperator*{\arctg}{arctg}}{}
+% Sinus hyperbolici (sinh)
+\ifcsundef{sh}{\DeclareMathOperator*{\sh}{sh}}{}
+% Cosinus hyperbolici
+\ifcsundef{ch}{\DeclareMathOperator*{\ch}{ch}}{}
 % Tangens hyperbolici
-\renewcommand{\tanh}{\mathop{\mathrm{th}}}
+\ifcsundef{th}{\DeclareMathOperator*{\th}{th}}{}
 
 % ===============================================================
 % Matrices

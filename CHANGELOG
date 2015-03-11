@@ -7,6 +7,9 @@ Changes in DMVN Style packages
 [+] = addition
 [-] = reduction
 
+11-03-2015 Mikhail Veltishchev <dichlofos-mv@yandex.ru>
+[-] Removed \tanh redefinition. Use \th instead
+
 26-05-2012 illusionoflife <illusion.of.life92@gmail.com>
 	* dmvnbase.sty: Added bold versions for {a,b,c,x} letters.
 	* dmvnindex.sty: Added "To be continued macro" and a few index related ones.
@@ -38,15 +41,3 @@ Changes in DMVN Style packages
 
 01 Feb 2006. v 1.30
 [f+] Added 'nodiagram' to reduce internal TeX graphics conflict with the Diagram package. 
-
-
-
-
-
-
-
-
-
-
-
-

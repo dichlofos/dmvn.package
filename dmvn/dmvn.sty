@@ -23,9 +23,24 @@
 \DeclareOption{diagram}{\@diagramtrue}
 \DeclareOption{nodiagram}{\@diagramfalse}
 
+\newif\if@utf
+\DeclareOption{utf}{\@utftrue}
+\DeclareOption{noutf}{\@utffalse}
 
 \ExecuteOptions{nosimple,dots,thmitshape,diagram}
 \ProcessOptions
+
+\if@utf
+\RequirePackage{epsf}
+\RequirePackage{polyglossia}
+\RequirePackage{unicode-math}
+\RequirePackage{fontspec}
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\setmathfont{xits-math.otf}
+\fi
 
 \newdimen\theoremskip
 \theoremskip=2pt
