@@ -4,6 +4,50 @@
 \ProvidesPackage{dmvnwin}[2015/04/02 v1.00 DMVN CP1251 LaTeX Package]
 \RequirePackage{russlh}
 
+% ======================================
+% russcorr.sty
+% ======================================
+
+\newcommand*{\tg}{\mathop{\operator@font tg}\nolimits}
+\newcommand*{\ctg}{\mathop{\operator@font ctg}\nolimits}
+\newcommand*{\cosec}{\mathop{\operator@font cosec}\nolimits}
+\newcommand*{\arctg}{\mathop{\operator@font arctg}\nolimits}
+\newcommand*{\arcctg}{\mathop{\operator@font arcctg}\nolimits}
+\newcommand*{\sh}{\mathop{\operator@font sh}\nolimits}
+\newcommand*{\ch}{\mathop{\operator@font ch}\nolimits}
+\DeclareTextCommand{\th}{OT1}{\mathop{\operator@font th}\nolimits}
+\newcommand*{\cth}{\mathop{\operator@font cth}\nolimits}
+
+\DeclareSymbolFont{AMSa}{U}{msa}{m}{n} \DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\varkappa}{\mathord}{AMSb}{"7B}
+\DeclareMathSymbol{\leqslant}{\mathrel}{AMSa}{"36}
+\DeclareMathSymbol{\geqslant}{\mathrel}{AMSa}{"3E}
+
+\def\contentsname{Оглавление}
+\def\figurename{Рис.}
+\def\partname{Часть}
+\def\listfigurename{Список рисунков}
+\def\listtablename{Список таблиц}
+\def\refname{Литература}
+\def\bibname{Литература}
+\def\indexname{Предметный указатель}
+\def\tablename{Таблица}
+\def\abstractname{Аннотация}
+\@ifundefined{chapter}{}{\def\chaptername{Глава}}
+\def\proofname{Доказательство}
+
+% \сегодня is the Russian counterpart of \today;
+% we prefer to keep the original \today intact
+\def\сегодня{\number\day\space
+                \ifcase\month\or
+                 января\or февраля\or марта\or апреля\or мая\or
+                 июня\or июля\or августа\or сентября\or октября\or
+                 ноября\or декабря\fi\space\number\year}
+
+% ======================================
+% DMVN
+% ======================================
+
 % ===============================================================
 % Document Title
 % ===============================================================
@@ -99,7 +143,6 @@
 \DeclareRobustCommand*{\т}{~\textemdash{} }
 \DeclareRobustCommand*{\Т}{~\textemdash{} }
 
-
 %===========================
 % Fix counters and lists
 %===========================
@@ -137,7 +180,7 @@
 \def\p@enumiii{\theenumi\theenumii}
 
 %===========================
-% here is utf8 encoding
+% here is windows-1251 encoding
 %===========================
 
 % right hyphen rules
