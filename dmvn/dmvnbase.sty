@@ -78,18 +78,24 @@
 \DeclareMathOperator{\vp}{v.p.}
 \DeclareMathOperator{\Var}{Var}
 
-% Russian-style functions
+% Russian-style functions, derived from russcorr
 
 % tan
 \ifcsundef{tg}{\DeclareMathOperator*{\tg}{tg}}{}
+% cot
+\ifcsundef{ctg}{\DeclareMathOperator*{\ctg}{ctg}}{}
+\ifcsundef{cosec}{\DeclareMathOperator*{\cosec}{cosec}}{}
 % atan
 \ifcsundef{arctg}{\DeclareMathOperator*{\arctg}{arctg}}{}
+\ifcsundef{arcctg}{\DeclareMathOperator*{\arcctg}{arcctg}}{}
 % Sinus hyperbolici (sinh)
 \ifcsundef{sh}{\DeclareMathOperator*{\sh}{sh}}{}
 % Cosinus hyperbolici
 \ifcsundef{ch}{\DeclareMathOperator*{\ch}{ch}}{}
 % Tangens hyperbolici
 \ifcsundef{th}{\DeclareMathOperator*{\th}{th}}{}
+% Cotangens hyperbolici
+\ifcsundef{cth}{\DeclareMathOperator*{\cth}{cth}}{}
 
 % ===============================================================
 % Matrices
