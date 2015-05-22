@@ -1,0 +1,47 @@
+% ===============================================================
+% Part of DMVN Style Package: CP1251 (Windows) version
+% Russian commands, etc
+%
+% This package is INCOMPATIBLE with inputenc[utf8] mode
+% that is compatible with DMVN package in non-XeLaTeX mode
+%
+% Derived from russcorr/russadd package family
+% by Serge Lvovski <serge@mccme.ru>, etc
+% ===============================================================
+\ProvidesPackage{dmvnwinrc}[2015/04/02 v1.00 DMVN CP1251 Russian commands LaTeX Package]
+
+% \сегодня is the Russian counterpart of \today;
+% we prefer to keep the original \today intact
+\def\сегодня{\number\day\space
+                \ifcase\month\or
+                 января\or февраля\or марта\or апреля\or мая\or
+                 июня\or июля\or августа\or сентября\or октября\or
+                 ноября\or декабря\fi\space\number\year}
+
+\RequirePackage{xspace}
+
+% ------------------ команды типа \те (т.е.) --------------------
+
+% Набирайте "т.е." командой \те . Остальное -- аналогично.
+% Теперь можно не беспокоиться о пробелах после этих команд.
+% Например, можно наравне с
+%     ..., \те\ ...
+%     ..., \те{} ...
+% писать просто
+%     ..., \те ...
+%
+
+\newcommand*{\те}{т.\,е.\xspace}
+\newcommand*{\Те}{Т.\,е.\xspace}
+\newcommand*{\тк}{т.\,к.\xspace}
+\newcommand*{\Тк}{Т.\,к.\xspace}
+\newcommand*{\итд}{и~т.\,д.\xspace}
+\newcommand*{\итп}{и~т.\,п.\xspace}
+
+\newcommand*{\клей}{\nobreak\hskip\z@skip}
+\DeclareRobustCommand*{\д}{\клей\hbox{-}\клей}
+\DeclareRobustCommand*{\Д}{\клей\hbox{-}\hskip\z@skip}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\клей}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\hskip\z@skip}
+\DeclareRobustCommand*{\т}{~\textemdash{} }
+\DeclareRobustCommand*{\Т}{~\textemdash{} }

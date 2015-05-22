@@ -23,14 +23,19 @@
 \DeclareOption{diagram}{\@diagramtrue}
 \DeclareOption{nodiagram}{\@diagramfalse}
 
+\newif\if@xe
+\DeclareOption{xe}{\@xetrue}
+\DeclareOption{noxe}{\@xefalse}
+
 \newif\if@utf
 \DeclareOption{utf}{\@utftrue}
 \DeclareOption{noutf}{\@utffalse}
 
-\ExecuteOptions{nosimple,dots,thmitshape,diagram}
+\ExecuteOptions{nosimple,dots,thmitshape,diagram,noutf}
 \ProcessOptions
 
-\if@utf
+\if@xe
+  % XeLaTeX mode
   \RequirePackage{epsf}
   \RequirePackage{polyglossia}
   \RequirePackage{unicode-math}
@@ -42,11 +47,24 @@
   \setmathfont{xits-math.otf}
   \RequirePackage{dmvnutf}
 \else
-  % we support obsolete windows encoding for older documents
-  \RequirePackage[T2A]{fontenc}
-  \RequirePackage[cp1251]{inputenc}
+  % Plain old LaTeX mode
+  % with both cp1251 and utf8 (experimental) support
+  \if@utf
+    \message{Enable UTF-8 mode}
+    \RequirePackage[T2A]{fontenc}
+    \RequirePackage[utf8]{inputenc}
+  \else
+    \RequirePackage[T2A]{fontenc}
+    \RequirePackage[cp1251]{inputenc}
+  \fi
   \RequirePackage[russian]{babel}
-  \RequirePackage{dmvnwin}
+  % support russian-style commands (a-la russcorr)
+  \if@utf
+    \RequirePackage{dmvnutf}
+  \else
+    \RequirePackage{dmvnwin}
+    \RequirePackage{dmvnwinrc}
+  \fi
 \fi
 
 \newdimen\theoremskip

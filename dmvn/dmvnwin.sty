@@ -8,16 +8,6 @@
 % russcorr.sty
 % ======================================
 
-\newcommand*{\tg}{\mathop{\operator@font tg}\nolimits}
-\newcommand*{\ctg}{\mathop{\operator@font ctg}\nolimits}
-\newcommand*{\cosec}{\mathop{\operator@font cosec}\nolimits}
-\newcommand*{\arctg}{\mathop{\operator@font arctg}\nolimits}
-\newcommand*{\arcctg}{\mathop{\operator@font arcctg}\nolimits}
-\newcommand*{\sh}{\mathop{\operator@font sh}\nolimits}
-\newcommand*{\ch}{\mathop{\operator@font ch}\nolimits}
-\DeclareTextCommand{\th}{OT1}{\mathop{\operator@font th}\nolimits}
-\newcommand*{\cth}{\mathop{\operator@font cth}\nolimits}
-
 \DeclareSymbolFont{AMSa}{U}{msa}{m}{n} \DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
 \DeclareMathSymbol{\varkappa}{\mathord}{AMSb}{"7B}
 \DeclareMathSymbol{\leqslant}{\mathrel}{AMSa}{"36}
@@ -35,14 +25,6 @@
 \def\abstractname{Аннотация}
 \@ifundefined{chapter}{}{\def\chaptername{Глава}}
 \def\proofname{Доказательство}
-
-% \сегодня is the Russian counterpart of \today;
-% we prefer to keep the original \today intact
-\def\сегодня{\number\day\space
-                \ifcase\month\or
-                 января\or февраля\or марта\or апреля\or мая\or
-                 июня\or июля\or августа\or сентября\or октября\or
-                 ноября\or декабря\fi\space\number\year}
 
 % ======================================
 % DMVN
@@ -109,39 +91,6 @@
 \newenvironment{solution}{\par\vskip\theoremskip\textbf{Решение.}}{$\blacksquare$ \par\vskip\theoremskip}
 \newenvironment{proof}{\par $\square\quad$}{\hfill $\blacksquare$ \par\vskip\theoremskip}
 \newenvironment{answer}{\textbf{Ответ:}}{\par\vskip\theoremskip}
-
-\RequirePackage{xspace}
-
-% ------------------ команды типа \те (т.е.) --------------------
-
-% Набирайте "т.е." командой \те . Остальное -- аналогично.
-% Теперь можно не беспокоиться о пробелах после этих команд.
-% Например, можно наравне с
-%     ..., \те\ ...
-%     ..., \те{} ...
-% писать просто
-%     ..., \те ...
-%
-
-\newcommand*{\те}{т.\,е.\xspace}
-\newcommand*{\Те}{Т.\,е.\xspace}
-\newcommand*{\тк}{т.\,к.\xspace}
-\newcommand*{\Тк}{Т.\,к.\xspace}
-\newcommand*{\итд}{и~т.\,д.\xspace}
-\newcommand*{\итп}{и~т.\,п.\xspace}
-
-%===========================
-% here is utf8 encoding
-% Code is derived from russadd.sty by Serge Lvovski
-%===========================
-
-\newcommand*{\клей}{\nobreak\hskip\z@skip}
-\DeclareRobustCommand*{\д}{\клей\hbox{-}\клей}
-\DeclareRobustCommand*{\Д}{\клей\hbox{-}\hskip\z@skip}
-\DeclareRobustCommand*{\ч}{\,\textendash\,\клей}
-\DeclareRobustCommand*{\ч}{\,\textendash\,\hskip\z@skip}
-\DeclareRobustCommand*{\т}{~\textemdash{} }
-\DeclareRobustCommand*{\Т}{~\textemdash{} }
 
 %===========================
 % Fix counters and lists
