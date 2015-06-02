@@ -10,38 +10,38 @@
 % ===============================================================
 \ProvidesPackage{dmvnwinrc}[2015/04/02 v1.00 DMVN CP1251 Russian commands LaTeX Package]
 
-% \СЃРµРіРѕРґРЅСЏ is the Russian counterpart of \today;
+% \сегодня is the Russian counterpart of \today;
 % we prefer to keep the original \today intact
-\def\СЃРµРіРѕРґРЅСЏ{\number\day\space
+\def\сегодня{\number\day\space
                 \ifcase\month\or
-                 СЏРЅРІР°СЂСЏ\or С„РµРІСЂР°Р»СЏ\or РјР°СЂС‚Р°\or Р°РїСЂРµР»СЏ\or РјР°СЏ\or
-                 РёСЋРЅСЏ\or РёСЋР»СЏ\or Р°РІРіСѓСЃС‚Р°\or СЃРµРЅС‚СЏР±СЂСЏ\or РѕРєС‚СЏР±СЂСЏ\or
-                 РЅРѕСЏР±СЂСЏ\or РґРµРєР°Р±СЂСЏ\fi\space\number\year}
+                 января\or февраля\or марта\or апреля\or мая\or
+                 июня\or июля\or августа\or сентября\or октября\or
+                 ноября\or декабря\fi\space\number\year}
 
 \RequirePackage{xspace}
 
-% ------------------ РєРѕРјР°РЅРґС‹ С‚РёРїР° \С‚Рµ (С‚.Рµ.) --------------------
+% ------------------ команды типа \те (т.е.) --------------------
 
-% РќР°Р±РёСЂР°Р№С‚Рµ "С‚.Рµ." РєРѕРјР°РЅРґРѕР№ \С‚Рµ . РћСЃС‚Р°Р»СЊРЅРѕРµ -- Р°РЅР°Р»РѕРіРёС‡РЅРѕ.
-% РўРµРїРµСЂСЊ РјРѕР¶РЅРѕ РЅРµ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ Рѕ РїСЂРѕР±РµР»Р°С… РїРѕСЃР»Рµ СЌС‚РёС… РєРѕРјР°РЅРґ.
-% РќР°РїСЂРёРјРµСЂ, РјРѕР¶РЅРѕ РЅР°СЂР°РІРЅРµ СЃ
-%     ..., \С‚Рµ\ ...
-%     ..., \С‚Рµ{} ...
-% РїРёСЃР°С‚СЊ РїСЂРѕСЃС‚Рѕ
-%     ..., \С‚Рµ ...
+% Набирайте "т.е." командой \те . Остальное -- аналогично.
+% Теперь можно не беспокоиться о пробелах после этих команд.
+% Например, можно наравне с
+%     ..., \те\ ...
+%     ..., \те{} ...
+% писать просто
+%     ..., \те ...
 %
 
-\newcommand*{\С‚Рµ}{С‚.\,Рµ.\xspace}
-\newcommand*{\РўРµ}{Рў.\,Рµ.\xspace}
-\newcommand*{\С‚Рє}{С‚.\,Рє.\xspace}
-\newcommand*{\РўРє}{Рў.\,Рє.\xspace}
-\newcommand*{\РёС‚Рґ}{Рё~С‚.\,Рґ.\xspace}
-\newcommand*{\РёС‚Рї}{Рё~С‚.\,Рї.\xspace}
+\newcommand*{\те}{т.\,е.\xspace}
+\newcommand*{\Те}{Т.\,е.\xspace}
+\newcommand*{\тк}{т.\,к.\xspace}
+\newcommand*{\Тк}{Т.\,к.\xspace}
+\newcommand*{\итд}{и~т.\,д.\xspace}
+\newcommand*{\итп}{и~т.\,п.\xspace}
 
-\newcommand*{\РєР»РµР№}{\nobreak\hskip\z@skip}
-\DeclareRobustCommand*{\Рґ}{\РєР»РµР№\hbox{-}\РєР»РµР№}
-\DeclareRobustCommand*{\Р”}{\РєР»РµР№\hbox{-}\hskip\z@skip}
-\DeclareRobustCommand*{\С‡}{\,\textendash\,\РєР»РµР№}
-\DeclareRobustCommand*{\С‡}{\,\textendash\,\hskip\z@skip}
-\DeclareRobustCommand*{\С‚}{~\textemdash{} }
-\DeclareRobustCommand*{\Рў}{~\textemdash{} }
+\newcommand*{\клей}{\nobreak\hskip\z@skip}
+\DeclareRobustCommand*{\д}{\клей\hbox{-}\клей}
+\DeclareRobustCommand*{\Д}{\клей\hbox{-}\hskip\z@skip}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\клей}
+\DeclareRobustCommand*{\ч}{\,\textendash\,\hskip\z@skip}
+\DeclareRobustCommand*{\т}{~\textemdash{} }
+\DeclareRobustCommand*{\Т}{~\textemdash{} }
